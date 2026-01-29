@@ -5,7 +5,12 @@ import { useForm, useWatch } from "react-hook-form";
 export default function FormPage() {
     const navigate = useNavigate();
 
-    const { register, handleSubmit, control, formState: { errors } } = useForm({
+    const {
+        register,
+        handleSubmit,
+        control,
+        formState: { errors },
+    } = useForm({
         defaultValues: {
             nama: "",
             umur: "",
@@ -15,7 +20,7 @@ export default function FormPage() {
         },
     });
 
-    const isPerokok = useWatch({
+    const perokokValue = useWatch({
         control,
         name: "perokok",
     });
@@ -35,6 +40,7 @@ export default function FormPage() {
     return (
         <div className="bg-[#f0ebf8] min-h-screen flex justify-center py-10">
             <div className="w-full max-w-2xl space-y-4">
+                {/* Header */}
                 <div className="bg-white rounded-lg border-t-8 border-[#673ab7] p-6 shadow">
                     <h1 className="text-2xl font-medium mb-2">Form Survei</h1>
                     <p className="text-sm text-gray-600">
@@ -125,7 +131,7 @@ export default function FormPage() {
                     </FormCard>
 
                     {/* Rokok (muncul hanya jika perokok = Ya) */}
-                    {isPerokok === "Ya" && (
+                    {perokokValue === "Ya" && (
                         <FormCard title="Rokok yang pernah dicoba">
                             {["Gudang Garam", "Lucky Strike", "Marlboro", "Esse"].map(
                                 (item) => (
@@ -143,6 +149,7 @@ export default function FormPage() {
                         </FormCard>
                     )}
 
+                    {/* Submit */}
                     <div className="flex items-center justify-between px-2">
                         <button
                             type="submit"
